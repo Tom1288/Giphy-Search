@@ -9,7 +9,7 @@ function game() {
     // Adding click event listen listener to all buttons
     $("button").on("click", function() {
 
-      $("#gifContainer").empty();
+      $("#Container").empty();
       // Grabbing and storing the data-animal property value from the button
       var search = $(this).attr("gif-name");
 
@@ -30,6 +30,8 @@ function game() {
           // storing the data from the AJAX request in the results variable
           var results = response.data;
 
+          var gifContainer = $("<div>")
+
           // Looping through each result item
           for (var i = 0; i < results.length; i++) {
 
@@ -43,6 +45,7 @@ function game() {
             var gifImage = $("<img>");
             // Setting the src attribute of the image to a property pulled off the result item
             gifImage.attr("src", results[i].images.fixed_height.url);
+            gifContainer.attr("id", "gifContainer")
 
             gifDiv.addClass("imageContainer col-lg-3 col-md-3 col-sm-3 col-xs-3")
             gifImage.addClass("gifImage")
@@ -54,27 +57,18 @@ function game() {
             gifDiv.append(gifImage)
 
             // Prependng the animalDiv to the HTML page in the "#gifs-appear-here" div
-            $("#gifContainer").prepend(gifDiv);
-
-
-
-
-  
-
-    //   <form id="searchForm">
-    //   <h2 for="addSearch-text">Search For Gifs!</h2>
-    //   <input type="text" id="addSearch-input"><br>
-
-    //   <!-- Button triggers new Animal to be added -->
-    //   <br>
-    //   <input id="addSearch" type="submit" value="Add Search Button!">
-    // </form>
-
+            gifContainer.append(gifDiv)
+            
       
           }
 
+          $("#Container").append(gifContainer);
 
-          //Creating New button Fomr
+
+
+        });
+
+                  //Creating New button Form
             var formContainer = $("<div>")
             var newButtonForm = $("<form>")
             var formTitle = $("<h2>")
@@ -87,7 +81,7 @@ function game() {
             formButton.attr("id", "addSearch")
             formButton.attr("type","submit")
 
-            formContainer.addClass(" col-lg-12 col-md-12 col-sm-12 col-xs-12")
+            formContainer.addClass(" col-lg-6 col-md-6 col-sm-6 col-xs-6")
 
             formContainer.append(newButtonForm)
             newButtonForm.append(formTitle)
@@ -95,8 +89,8 @@ function game() {
             newButtonForm.append(formBr)
             newButtonForm.append(formButton)
 
-            $("#gifContainer").prepend(formContainer)
-        });
+            $("body").append(formContainer)
+
       });
 
   }
